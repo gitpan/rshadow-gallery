@@ -1,0 +1,32 @@
+% my ($item) = @_;
+<div class="item">
+    <a href="<%= $item->{href} %>">
+        <% if( defined $item->{icon} ) { =%>
+            <img
+                <% if( exists $item->{image} ) { %>class="image" <% } %>
+                <% if( defined $item->{mime} ) { =%>
+                    title="<%= "$item->{mime}" =%>"
+                <% } =%>
+                src="data:<%= $item->{icon}{mime} %>;base64,<%= $item->{icon}{raw} %>"
+            />
+        <% } =%>
+        <% if( defined $item->{filename} ) { =%>
+            <br/>
+            <details class="filename" open="open">
+                <%= $item->{filename} =%>
+            </details>
+        <% } =%>
+        <% if(defined $item->{image}{width} and defined $item->{image}{height} ) { =%>
+            <br/>
+            <details class="extended wxh" open="open">
+                <%= $item->{image}{width} %> x <%= $item->{image}{height} %>
+            </details>
+        <% } =%>
+        <% if( defined $item->{size} ) { =%>
+            <br/>
+            <details class="extended size" open="open">
+                <%= $item->{size} || '' =%>
+           </details>
+        <% } =%>
+    </a>
+</div>
